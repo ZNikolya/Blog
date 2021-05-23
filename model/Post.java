@@ -8,10 +8,10 @@ public class Post {
 
     private String title;
     private String text;
-    private String category;
+    private Category category;
     private Date createdDate;
 
-    public Post(String title, String text, String category, Date createdDate) {
+    public Post(String title, String text, Category category, Date createdDate) {
         this.title = title;
         this.text = text;
         this.category = category;
@@ -37,11 +37,11 @@ public class Post {
         this.text = text;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
@@ -58,7 +58,7 @@ public class Post {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Post post = (Post) o;
-        return Objects.equals(title, post.title) && Objects.equals(text, post.text) && Objects.equals(category, post.category) && Objects.equals(createdDate, post.createdDate);
+        return Objects.equals(title, post.title) && Objects.equals(text, post.text) && category == post.category && Objects.equals(createdDate, post.createdDate);
     }
 
     @Override
@@ -70,8 +70,8 @@ public class Post {
     public String toString() {
         return "Post{" +
                 "title='" + title + '\'' +
-                ", tetx='" + text + '\'' +
-                ", category='" + category + '\'' +
+                ", text='" + text + '\'' +
+                ", category=" + category +
                 ", createdDate=" + createdDate +
                 '}';
     }

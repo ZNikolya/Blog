@@ -1,6 +1,9 @@
 package homework.blog.storage;
 
+import homework.blog.model.Category;
 import homework.blog.model.Post;
+
+import java.util.Scanner;
 
 public class PostStorage {
 
@@ -38,9 +41,9 @@ public class PostStorage {
         System.out.println();
     }
 
-    public void printPostsByCategory(String category) {
+    public void printPostsByCategory(Category category) {
         for (int i = 0; i < size; i++) {
-            if (array[i].getCategory().equalsIgnoreCase(category)) {
+            if (array[i].getCategory().equals(category)) {
                 System.out.println(array[i]);
             }
         }
@@ -55,5 +58,50 @@ public class PostStorage {
 
         }
     }
+
+    public void deletePost(String title) {
+        for (int i = 0; i < size; i++) {
+            if (array[i].getTitle().equalsIgnoreCase(title)) {
+                deleteIndex(i);
+                i = 0;
+                size--;
+            }
+        }
+    }
+
+    public void deleteIndex(int index) {
+        for (int i = size - 1; i > index; i--) {
+            Post com = array[size - 1];
+            System.arraycopy(array, 0, array, 1, size - 1);
+            array[0] = com;
+
+        }
+    }
+
+    public void deletePostByCategory(Category category) {
+        try {
+            int i = 0;
+            while (array[i].getCategory().equals(category)) {
+                deleteIndex(i);
+                size--;
+            }
+        }catch (ArrayIndexOutOfBoundsException e){
+
+        }
+
+    }
+
+    public String changePost(String title) {
+        for (int i = 0; i < size; i++) {
+            if (array[i].getTitle().equalsIgnoreCase(title)){
+                Scanner scanner = new Scanner(System.in);
+                array[i].setText(scanner.next());
+                array[i].setCategory(Category.valueOf(scanner.next().toUpperCase()));
+                return array[i].getText();
+            }
+        }
+    return null;
+    }
+
 }
 
